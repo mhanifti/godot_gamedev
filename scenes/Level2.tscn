@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://bubbyvfgdow4i"]
+
+[ext_resource type="Script" uid="uid://bsuv2svmaqypq" path="res://scenes/PlatformBlue.gd" id="1_qe5b6"]
+[ext_resource type="PackedScene" uid="uid://b82qieav34xn6" path="res://scenes/MarsPlatform.tscn" id="2_qe5b6"]
+[ext_resource type="PackedScene" uid="uid://datfp8kxjrjg" path="res://scenes/BlueShip.tscn" id="3_qwp14"]
+[ext_resource type="Script" uid="uid://buha0qve47owk" path="res://scenes/blue_ship.gd" id="4_xpq2v"]
+[ext_resource type="Texture2D" uid="uid://c7awg4wjkpbxf" path="res://back_img.jpg" id="5_qe5b6"]
+
+[sub_resource type="GDScript" id="GDScript_ykko5"]
+script/source = "extends Node
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	print(\"Level 2 Ready\")
+	
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _on_objective_area_body_entered(body: Node2D) -> void:
+	if (body.name == \"BlueShip\"):
+		print(\"Reached objective!\")
+"
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ykko5"]
+
+[sub_resource type="GDScript" id="GDScript_sp0w3"]
+script/source = "extends Area2D
+
+func _on_ObjectiveArea_body_entered(body: RigidBody2D):
+	if (body.name == \"BlueShip\"):
+		print(\"Reached objective!\")
+		
+"
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(138.75, 79)
+
+[node name="MainLevel" type="Node" unique_id=832108525]
+script = SubResource("GDScript_ykko5")
+
+[node name="PlatformBlue" type="Node2D" parent="." unique_id=1028510209]
+position = Vector2(35, 565)
+script = ExtResource("1_qe5b6")
+
+[node name="MarsPlatform" parent="PlatformBlue" unique_id=1429070664 instance=ExtResource("2_qe5b6")]
+
+[node name="MarsPlatform2" parent="PlatformBlue" unique_id=1275434322 instance=ExtResource("2_qe5b6")]
+position = Vector2(70, 0)
+
+[node name="PlatformBlue2" type="Node2D" parent="." unique_id=1954551390]
+position = Vector2(1041, 329)
+script = ExtResource("1_qe5b6")
+
+[node name="MarsPlatform" parent="PlatformBlue2" unique_id=677795512 instance=ExtResource("2_qe5b6")]
+
+[node name="MarsPlatform2" parent="PlatformBlue2" unique_id=333057858 instance=ExtResource("2_qe5b6")]
+position = Vector2(70, 0)
+
+[node name="BlueShip" parent="." unique_id=150247224 instance=ExtResource("3_qwp14")]
+position = Vector2(74, 422)
+physics_material_override = SubResource("PhysicsMaterial_ykko5")
+lock_rotation = true
+script = ExtResource("4_xpq2v")
+
+[node name="ObjectiveArea" type="Area2D" parent="." unique_id=779178061]
+position = Vector2(1005, 210)
+script = SubResource("GDScript_sp0w3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectiveArea" unique_id=670694693]
+position = Vector2(70.625, 40)
+shape = SubResource("1")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=719012187]
+z_index = -1
+offset_left = -7.0
+offset_top = -16.000244
+offset_right = 6063.0
+offset_bottom = 3397.9998
+scale = Vector2(0.19681391, 0.19809528)
+texture = ExtResource("5_qe5b6")
+
+[connection signal="body_entered" from="ObjectiveArea" to="." method="_on_objective_area_body_entered"]
