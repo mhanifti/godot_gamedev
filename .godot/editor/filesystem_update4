@@ -1,2 +1,8 @@
 res://default_env.tres
 res://scenes/MainLevel.tscn
+res://scenes/blue_ship.gd
+res://scenes/PlatformBlue.gd
+res://scenes/ObjectiveArea.gd
+res://scenes/Level1.tscn
+res://scenes/Level2.tscn
+res://scenes/MarsPlatform.tscn

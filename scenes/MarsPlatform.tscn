@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b82qieav34xn6"]
+
+[ext_resource type="Texture2D" uid="uid://c0do1j2bc1edf" path="res://assets/stone.png" id="1_a0ye5"]
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(70.8416, 70.5898)
+
+[node name="MarsPlatform" type="StaticBody2D" unique_id=1429070664]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=988657764]
+modulate = Color(0, 1, 1, 1)
+texture = ExtResource("1_a0ye5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1098346283]
+shape = SubResource("2")
+debug_color = Color(0.40581134, 0.6078386, 0, 0.41960785)
