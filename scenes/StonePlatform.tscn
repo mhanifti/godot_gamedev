@@ -2,10 +2,16 @@
 
 [ext_resource type="Texture2D" uid="uid://c0do1j2bc1edf" path="res://assets/stone.png" id="1_3p1dt"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nxc6q"]
+bounce = 0.15
+absorbent = true
+
 [sub_resource type="RectangleShape2D" id="2"]
 size = Vector2(70.8416, 70.5898)
 
 [node name="StonePlatform" type="StaticBody2D" unique_id=1429070664]
+z_index = 1
+physics_material_override = SubResource("PhysicsMaterial_nxc6q")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=988657764]
 texture = ExtResource("1_3p1dt")

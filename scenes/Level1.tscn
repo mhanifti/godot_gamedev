@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://cdoksexcakmop"]
 
 [ext_resource type="PackedScene" uid="uid://y5a4e3ajuy2r" path="res://scenes/StonePlatform.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://datfp8kxjrjg" path="res://scenes/BlueShip.tscn" id="2"]
+[ext_resource type="Script" uid="uid://d1ukie2cky45a" path="res://scenes/rocket.gd" id="1_lrl65"]
 [ext_resource type="Script" uid="uid://bsuv2svmaqypq" path="res://scenes/PlatformBlue.gd" id="3"]
-[ext_resource type="Script" uid="uid://buha0qve47owk" path="res://scenes/blue_ship.gd" id="4_ykko5"]
-[ext_resource type="Texture2D" uid="uid://c7awg4wjkpbxf" path="res://back_img.jpg" id="5_lrl65"]
+[ext_resource type="PackedScene" uid="uid://dtxljlkk4e43n" path="res://scenes/rocket.tscn" id="5_76388"]
+[ext_resource type="Texture2D" uid="uid://c7awg4wjkpbxf" path="res://assets/back_img.jpg" id="5_lrl65"]
 
-[sub_resource type="GDScript" id="GDScript_ykko5"]
+[sub_resource type="GDScript" id="GDScript_dw26h"]
 script/source = "extends Node
 
 var level = 2
@@ -33,18 +33,10 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_objective_area_body_entered(body: Node2D) -> void:
-	if (body.name == \"BlueShip\"):
+	if (body.name == \"Rocket\"):
 		print(\"Reached objective!\")
 		$CanvasLayer/AnimationPlayer.play(\"fade_in\")
 "
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jsrw5"]
-bounce = 0.65
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yxyfn"]
-bounce = 0.65
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ykko5"]
 
 [sub_resource type="GDScript" id="GDScript_sp0w3"]
 script/source = "extends Area2D
@@ -111,7 +103,7 @@ _data = {
 }
 
 [node name="MainLevel" type="Node" unique_id=832108525]
-script = SubResource("GDScript_ykko5")
+script = SubResource("GDScript_dw26h")
 
 [node name="PlatformBlue" type="Node2D" parent="." unique_id=1028510209]
 position = Vector2(35, 565)
@@ -119,10 +111,8 @@ script = ExtResource("3")
 
 [node name="StonePlatform2" parent="PlatformBlue" unique_id=1594265889 instance=ExtResource("1")]
 position = Vector2(70, 0)
-physics_material_override = SubResource("PhysicsMaterial_jsrw5")
 
 [node name="StonePlatform" parent="PlatformBlue" unique_id=964098601 instance=ExtResource("1")]
-physics_material_override = SubResource("PhysicsMaterial_yxyfn")
 
 [node name="PlatformBlue2" type="Node2D" parent="." unique_id=1954551390]
 position = Vector2(1045, 565)
@@ -130,19 +120,12 @@ script = ExtResource("3")
 
 [node name="StonePlatform2" parent="PlatformBlue2" unique_id=1429070664 instance=ExtResource("1")]
 position = Vector2(70, 0)
-physics_material_override = SubResource("PhysicsMaterial_jsrw5")
 
 [node name="StonePlatform" parent="PlatformBlue2" unique_id=1345087702 instance=ExtResource("1")]
-physics_material_override = SubResource("PhysicsMaterial_yxyfn")
-
-[node name="BlueShip" parent="." unique_id=150247224 instance=ExtResource("2")]
-position = Vector2(74, 422)
-physics_material_override = SubResource("PhysicsMaterial_ykko5")
-lock_rotation = true
-script = ExtResource("4_ykko5")
 
 [node name="ObjectiveArea" type="Area2D" parent="." unique_id=779178061]
-position = Vector2(1009, 446)
+position = Vector2(1009, 515)
+scale = Vector2(1, 0.16000003)
 script = SubResource("GDScript_sp0w3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectiveArea" unique_id=670694693]
@@ -170,6 +153,10 @@ offset_right = 6063.0
 offset_bottom = 3397.9998
 scale = Vector2(0.19681391, 0.19809528)
 texture = ExtResource("5_lrl65")
+
+[node name="Rocket" parent="." unique_id=1529954183 instance=ExtResource("5_76388")]
+position = Vector2(69, 469)
+script = ExtResource("1_lrl65")
 
 [connection signal="body_entered" from="ObjectiveArea" to="." method="_on_objective_area_body_entered"]
 [connection signal="animation_finished" from="CanvasLayer/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
