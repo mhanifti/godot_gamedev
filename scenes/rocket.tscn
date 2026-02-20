@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dtxljlkk4e43n"]
+
+[ext_resource type="Texture2D" uid="uid://ddds1r1cxdx2k" path="res://assets/rocket.png" id="1_3341w"]
+[ext_resource type="Texture2D" uid="uid://boy8ysl73mn0e" path="res://assets/fire.png" id="2_dkv7l"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dkv7l"]
+bounce = 0.15
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dkv7l"]
+size = Vector2(86, 112)
+
+[node name="Rocket" type="RigidBody2D" unique_id=870073602]
+physics_material_override = SubResource("PhysicsMaterial_dkv7l")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=641604997]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_3341w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=692512118]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_dkv7l")
+
+[node name="fire" type="Sprite2D" parent="." unique_id=1456252591]
+visible = false
+position = Vector2(2.3841858e-07, 89)
+scale = Vector2(0.09440559, 0.09440559)
+texture = ExtResource("2_dkv7l")
+flip_v = true
